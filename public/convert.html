@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Convert Rewards</title>
+
+<style>
+body{
+margin:0;
+background:#0b132b;
+font-family:Arial,sans-serif;
+color:white;
+text-align:center;
+}
+
+.header{
+background:#14b8a6;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:400px;
+margin:30px auto;
+padding:20px;
+}
+
+.card{
+background:#1d274a;
+padding:20px;
+border-radius:10px;
+}
+
+.value{
+font-size:32px;
+font-weight:bold;
+color:gold;
+margin:20px 0;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+background:gold;
+font-size:18px;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+⭐ Convert Rewards
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Pending Rewards</h2>
+
+<div class="value" id="money">
+Loading...
+</div>
+
+<button onclick="convertRewards()">
+Convert to Points
+</button>
+
+</div>
+
+<button onclick="window.location.href='dashboard.html'">
+⬅ Back to Dashboard
+</button>
+
+</div>
+
+<script>
+
+const USER_ID="demo";
+
+async function loadUser(){
+
+const response=await fetch("/api/user/"+USER_ID);
+
+const user=await response.json();
+
+document.getElementById("money").innerHTML=
+"KES "+user.pendingRewards;
+
+return user;
+
+}
+
+async function convertRewards(){
+
+let user=await loadUser();
+
+user.points += user.pendingRewards;
+
+user.pendingRewards = 0;
+
+await fetch("/api/user/"+USER_ID,{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify(user)
+});
+
+alert("Rewards converted successfully!");
+
+window.location.href="dashboard.html";
+
+}
+
+loadUser();
+
+</script>
+
+</body>
+</html>
+

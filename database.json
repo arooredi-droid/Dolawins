@@ -1,0 +1,35 @@
+{
+  "users": {
+    "demo": {
+      "points": 0,
+      "pendingRewards": 0,
+      "subscription": false,
+      "history": []
+    },
+    "Kimutai": {
+      "username": "Kimutai",
+      "password": "Aron",
+      "points": 0,
+      "pendingRewards": 0,
+      "subscription": false,
+      "history": []
+    },
+    "Kiptai": {
+      "username": "Kiptai",
+      "password": "kiptai",
+      "points": 0,
+      "pendingRewards": 2050,
+      "subscription": false,
+      "history": [
+        {
+          "date": "7/14/2026, 3:36:37 AM",
+          "prize": 50
+        },
+        {
+          "date": "7/14/2026, 3:36:37 AM",
+          "prize": 2000
+        }
+      ]
+    }
+  }
+}

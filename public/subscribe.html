@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Subscribe to Claim Reward</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b132b;
+color:white;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.box{
+background:#1d274a;
+padding:25px;
+border-radius:12px;
+width:340px;
+text-align:center;
+}
+
+.reward{
+font-size:38px;
+font-weight:bold;
+color:gold;
+margin:20px 0;
+}
+
+.code{
+font-size:32px;
+font-weight:bold;
+color:#00ff99;
+margin:20px 0;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+font-size:18px;
+font-weight:bold;
+border:none;
+border-radius:8px;
+background:gold;
+color:black;
+cursor:pointer;
+}
+
+p{
+line-height:1.6;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>🎉 Congratulations!</h2>
+
+<p>You have won</p>
+
+<div class="reward" id="reward"></div>
+
+<p>
+To claim your reward, first subscribe to our Skiza Tune.
+</p>
+
+<div class="code">
+*811*878#
+</div>
+
+<p>
+Dial <b>*811*878#</b>, complete the subscription, then press the button below.
+</p>
+
+<button onclick="claimReward()">
+✅ I've Subscribed
+</button>
+
+</div>
+
+<script>
+
+const prize = Number(localStorage.getItem("lastPrize")) || 0;
+
+document.getElementById("reward").innerHTML = "KES " + prize;
+
+function claimReward(){
+
+let money = Number(localStorage.getItem("money")) || 0;
+
+money += prize;
+
+localStorage.setItem("money", money);
+
+let history = JSON.parse(localStorage.getItem("rewardHistory")) || [];
+
+history.unshift({
+date: new Date().toLocaleString(),
+amount: prize,
+status: "Claimed"
+});
+
+localStorage.setItem("rewardHistory", JSON.stringify(history));
+
+localStorage.removeItem("lastPrize");
+
+alert("Reward added successfully!");
+
+window.location.href="dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

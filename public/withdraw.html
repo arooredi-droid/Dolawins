@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Withdraw - Dolawins</title>
+
+<style>
+body{
+    margin:0;
+    background:#0b132b;
+    color:white;
+    font-family:Arial,sans-serif;
+    text-align:center;
+}
+
+.header{
+    background:#14b8a6;
+    padding:15px;
+    font-size:24px;
+    font-weight:bold;
+}
+
+.container{
+    width:90%;
+    max-width:400px;
+    margin:30px auto;
+}
+
+.card{
+    background:#1d274a;
+    padding:20px;
+    border-radius:10px;
+}
+
+input{
+    width:100%;
+    padding:15px;
+    margin:10px 0;
+    border:none;
+    border-radius:8px;
+    font-size:16px;
+    box-sizing:border-box;
+}
+
+button{
+    width:100%;
+    padding:15px;
+    margin-top:10px;
+    border:none;
+    border-radius:8px;
+    background:#ffd000;
+    color:black;
+    font-size:18px;
+    font-weight:bold;
+}
+
+.message{
+    color:#ffd000;
+    margin-top:20px;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+💸 Withdraw
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Request Withdrawal</h2>
+
+<input type="text" placeholder="M-Pesa Number">
+
+<input type="number" placeholder="Amount">
+
+<button onclick="withdrawMoney()">
+Withdraw
+</button>
+
+<p class="message" id="message"></p>
+
+</div>
+
+<button onclick="window.location.href='dashboard.html'">
+⬅ Back to Dashboard
+</button>
+
+</div>
+
+<script>
+
+function withdrawMoney(){
+
+let subscribed = localStorage.getItem("subscribed");
+
+if(subscribed=="yes"){
+
+document.getElementById("message").innerHTML =
+"✅ Withdrawal request received. We will process it shortly.";
+
+}else{
+
+document.getElementById("message").innerHTML =
+"❌ You must subscribe first before withdrawing.";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Daily Bonus</title>
+
+<style>
+body{
+margin:0;
+background:#0b132b;
+font-family:Arial,sans-serif;
+color:white;
+text-align:center;
+}
+
+.header{
+background:#14b8a6;
+padding:18px;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+width:90%;
+max-width:400px;
+margin:30px auto;
+}
+
+.card{
+background:#1d274a;
+padding:20px;
+border-radius:10px;
+}
+
+.reward{
+font-size:40px;
+color:gold;
+font-weight:bold;
+margin:20px 0;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:15px;
+border:none;
+border-radius:8px;
+background:gold;
+color:black;
+font-size:18px;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+🎁 Daily Bonus
+</div>
+
+<div class="container">
+
+<div class="card">
+
+<h2>Claim Your Daily Bonus</h2>
+
+<div class="reward">
+KES 50
+</div>
+
+<p>You can claim this bonus once every day.</p>
+
+<button onclick="claimBonus()">
+🎁 Claim Bonus
+</button>
+
+</div>
+
+<button onclick="window.location.href='dashboard.html'">
+⬅ Back to Dashboard
+</button>
+
+</div>
+
+<script>
+
+function claimBonus(){
+
+let lastBonus = localStorage.getItem("lastBonus");
+let today = new Date().toDateString();
+
+if(lastBonus === today){
+
+alert("You have already claimed today's bonus.");
+
+return;
+
+}
+
+let money = Number(localStorage.getItem("money")) || 0;
+
+money += 50;
+
+localStorage.setItem("money", money);
+
+localStorage.setItem("lastBonus", today);
+
+alert("Congratulations! You received KES 50 bonus.");
+
+window.location.href = "dashboard.html";
+
+}
+
+</script>
+
+</body>
+</html>

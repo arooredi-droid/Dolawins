@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Reward History</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b132b;
+color:white;
+}
+
+.header{
+background:#14b8a6;
+padding:18px;
+text-align:center;
+font-size:24px;
+font-weight:bold;
+}
+
+.container{
+max-width:420px;
+margin:auto;
+padding:20px;
+}
+
+.card{
+background:#1d274a;
+padding:15px;
+border-radius:10px;
+margin-bottom:15px;
+}
+
+.amount{
+font-size:26px;
+font-weight:bold;
+color:gold;
+}
+
+.date{
+margin-top:8px;
+font-size:14px;
+color:#cccccc;
+}
+
+.status{
+margin-top:8px;
+font-size:16px;
+font-weight:bold;
+color:#00ff66;
+}
+
+button{
+width:100%;
+padding:15px;
+margin-top:20px;
+border:none;
+border-radius:8px;
+background:gold;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="header">
+📜 Reward History
+</div>
+
+<div class="container" id="historyList">
+</div>
+
+<div class="container">
+<button onclick="window.location.href='dashboard.html'">
+⬅ Back to Dashboard
+</button>
+</div>
+
+<script>
+
+const history = JSON.parse(localStorage.getItem("rewardHistory")) || [];
+
+const historyList = document.getElementById("historyList");
+
+if(history.length===0){
+
+historyList.innerHTML="<h3>No reward history available.</h3>";
+
+}else{
+
+history.forEach(function(item){
+
+historyList.innerHTML += `
+<div class="card">
+
+<div class="amount">
+KES ${item.amount}
+</div>
+
+<div class="date">
+📅 ${item.date}
+</div>
+
+<div class="status">
+✅ ${item.status}
+</div>
+
+</div>
+`;
+
+});
+
+}
+
+</script>
+
+</body>
+</html>

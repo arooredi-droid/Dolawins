@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dolawins Spin & Win</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Arial,sans-serif;
+}
+
+body{
+background:#0b132b;
+color:#fff;
+text-align:center;
+padding:20px;
+}
+
+h1{
+margin:20px 0;
+font-size:30px;
+}
+
+.pointer{
+font-size:55px;
+color:#ff0000;
+margin-bottom:-18px;
+z-index:100;
+position:relative;
+}
+
+#wheelContainer{
+display:flex;
+justify-content:center;
+align-items:center;
+margin-top:10px;
+}
+
+canvas{
+background:#fff;
+border-radius:50%;
+border:8px solid gold;
+box-shadow:0 0 20px gold;
+}
+
+button{
+margin-top:25px;
+padding:15px 40px;
+font-size:22px;
+font-weight:bold;
+background:gold;
+border:none;
+border-radius:10px;
+cursor:pointer;
+}
+
+button:hover{
+background:orange;
+}
+
+#result{
+margin-top:20px;
+font-size:26px;
+font-weight:bold;
+color:#00ff66;
+}
+
+</style>
+</head>
+
+<body>
+
+<h1>🎡 Spin & Win</h1>
+
+<div class="pointer">▼</div>
+
+<div id="wheelContainer">
+<canvas id="wheel" width="320" height="320"></canvas>
+</div>
+
+<button onclick="spinWheel()">SPIN</button>
+
+<div id="result"></div>
+
+<script>
+
+const prizes=[
+"KES 20",
+"KES 50",
+"KES 100",
+"KES 200",
+"KES 500",
+"KES 1000",
+"KES 2000",
+"TRY AGAIN"
+];
+
+const colors=[
+"#ff4d4d",
+"#ff9800",
+"#ffd700",
+"#4caf50",
+"#03a9f4",
+"#3f51b5",
+"#9c27b0",
+"#607d8b"
+];
+
+const canvas=document.getElementById("wheel");
+const ctx=canvas.getContext("2d");
+
+const size=320;
+const center=size/2;
+const radius=150;
+const slices=8;
+const angle=(2*Math.PI)/slices;
+
+let rotation=0;
+
+function drawWheel(){
+
+ctx.clearRect(0,0,size,size);
+
+for(let i=0;i<slices;i++){
+
+const start=i*angle+rotation;
+const end=start+angle;
+
+ctx.beginPath();
+ctx.moveTo(center,center);
+ctx.arc(center,center,radius,start,end);
+ctx.closePath();
+
+ctx.fillStyle=colors[i];
+ctx.fill();
+ctx.strokeStyle="#ffffff";
+ctx.lineWidth=2;
+ctx.stroke();
+
+ctx.save();
+
+ctx.translate(center,center);
+ctx.rotate(start+angle/2);
+
+ctx.fillStyle="#ffffff";
+ctx.font="bold 15px Arial";
+ctx.textAlign="right";
+
+ctx.fillText(prizes[i],radius-15,5);
+
+ctx.restore();
+
+}
+
+}
+
+drawWheel();
+
+function spinWheel(){
+
+const winner=Math.floor(Math.random()*prizes.length);
+
+const spins=6;
+
+const targetAngle=(winner*45)+22.5;
+
+const finalRotation=(spins*360)+(360-targetAngle);
+
+const startRotation=rotation*180/Math.PI;
+
+const animation=finalRotation-startRotation;
+
+const start=performance.now();
+
+function animate(time){
+
+const progress=Math.min((time-start)/5000,1);
+
+const ease=1-Math.pow(1-progress,3);
+
+rotation=(startRotation+animation*ease)*Math.PI/180;
+
+drawWheel();
+
+if(progress<1){
+
+requestAnimationFrame(animate);
+
+}else{
+
+const prize=prizes[winner];
+
+document.getElementById("result").innerHTML=
+"🎉 You Won "+prize;
+
+localStorage.setItem("lastPrize",prize.replace("KES ",""));
+
+setTimeout(function(){
+
+window.location.href="subscribe.html";
+
+},2000);
+
+}
+
+}
+
+requestAnimationFrame(animate);
+
+}
+
+</script>
+
+</body>
+</html>

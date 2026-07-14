@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Register - Dolawins</title>
+
+<style>
+body{
+margin:0;
+font-family:Arial,sans-serif;
+background:#0b132b;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+color:white;
+}
+
+.box{
+background:#1d274a;
+padding:30px;
+border-radius:12px;
+width:320px;
+text-align:center;
+}
+
+input{
+width:100%;
+padding:12px;
+margin:10px 0;
+border:none;
+border-radius:6px;
+font-size:16px;
+box-sizing:border-box;
+}
+
+button{
+width:100%;
+padding:12px;
+margin-top:10px;
+background:gold;
+border:none;
+border-radius:6px;
+font-size:18px;
+font-weight:bold;
+cursor:pointer;
+}
+
+a{
+color:#14b8a6;
+text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<div class="box">
+
+<h2>Create Account</h2>
+
+<input type="text" id="username" placeholder="Username">
+
+<input type="password" id="password" placeholder="Password">
+
+<input type="text" id="referral" placeholder="Referral Code (Optional)">
+
+<button onclick="register()">Register</button>
+
+<p>Already have an account?
+<a href="login.html">Login</a>
+</p>
+
+</div>
+
+<script>
+
+async function register(){
+
+const username=document.getElementById("username").value.trim();
+const password=document.getElementById("password").value.trim();
+const referral=document.getElementById("referral").value.trim();
+
+if(username===""||password===""){
+alert("Please fill all required fields.");
+return;
+}
+
+const response=await fetch("/api/register",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+username,
+password,
+referral
+})
+});
+
+const result=await response.json();
+
+alert(result.message);
+
+if(result.success){
+
+localStorage.setItem("currentUser",username);
+
+window.location.href="dashboard.html";
+
+}
+
+}
+
+</script>
+
+</body>
+</html>
