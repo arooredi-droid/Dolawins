@@ -19,11 +19,6 @@ function loadDB() {
 
 function saveDB(data) {
     fs.writeFileSync(DB_FILE, JSON.stringify(data, null, 2));
-}
-
-app.get("/", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "index.html"));
-});
 
 app.post("/api/register", (req, res) => {
 
