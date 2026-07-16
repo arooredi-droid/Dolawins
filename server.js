@@ -145,8 +145,8 @@ app.post("/admin/login", (req, res) => {
     });
 });
 
-app.get("/admin/dashboard", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "admin_dashboard.html"));
+app.get("/", (req, res) => {
+    res.sendFile(path.join(__dirname, "public", "spin.html"));
 });
 app.post("/admin/approve/:username", (req, res) => {
     const db = loadDB();

@@ -198,11 +198,17 @@ const prize=prizes[winner];
 document.getElementById("result").innerHTML=
 "🎉 You Won "+prize;
 
-localStorage.setItem("lastPrize",prize.replace("KES ",""));
+localStorage.setItem("lastPrize", prize.replace("KES ",""));
 
 setTimeout(function(){
 
-window.location.href="subscribe.html";
+const code = prompt("Enter 4-digit code");
+
+if(code === "1234"){
+    window.location.href = "subscribe.html";
+}else{
+    alert("Invalid code");
+}
 
 },2000);
 

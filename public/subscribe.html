@@ -2,125 +2,54 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Subscribe to Claim Reward</title>
-
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Subscribe</title>
 <style>
 body{
-margin:0;
-font-family:Arial,sans-serif;
 background:#0b132b;
 color:white;
-display:flex;
-justify-content:center;
-align-items:center;
-height:100vh;
-}
-
-.box{
-background:#1d274a;
-padding:25px;
-border-radius:12px;
-width:340px;
+font-family:Arial;
 text-align:center;
+padding:40px;
 }
-
-.reward{
-font-size:38px;
+h1{color:gold;}
+.box{
+background:#16213e;
+padding:20px;
+border-radius:12px;
+max-width:400px;
+margin:auto;
+}
+.code{
+font-size:32px;
 font-weight:bold;
 color:gold;
 margin:20px 0;
 }
-
-.code{
-font-size:32px;
-font-weight:bold;
-color:#00ff99;
-margin:20px 0;
-}
-
 button{
-width:100%;
-padding:15px;
-margin-top:15px;
+padding:15px 30px;
 font-size:18px;
-font-weight:bold;
 border:none;
 border-radius:8px;
 background:gold;
-color:black;
 cursor:pointer;
 }
-
-p{
-line-height:1.6;
-}
 </style>
-
 </head>
-
 <body>
 
 <div class="box">
+<h1>Subscription Required</h1>
 
-<h2>🎉 Congratulations!</h2>
+<p>Dial the code below to subscribe:</p>
 
-<p>You have won</p>
+<div class="code">*811*265#</div>
 
-<div class="reward" id="reward"></div>
-
-<p>
-To claim your reward, first subscribe to our Skiza Tune.
-</p>
-
-<div class="code">
-*811*878#
-</div>
-
-<p>
-Dial <b>*811*878#</b>, complete the subscription, then press the button below.
-</p>
-
-<button onclick="claimReward()">
-✅ I've Subscribed
+<button onclick="window.location.href='spin.html'">
+I've Subscribed
 </button>
 
 </div>
-
-<script>
-
-const prize = Number(localStorage.getItem("lastPrize")) || 0;
-
-document.getElementById("reward").innerHTML = "KES " + prize;
-
-async function claimReward(){
-
-const phone = prompt("Enter your phone number:");
-if(!phone) return;
-
-const prize = Number(localStorage.getItem("lastPrize")) || 0;
-
-const res = await fetch("/api/subscribe",{
-method:"POST",
-headers:{
-"Content-Type":"application/json"
-},
-body:JSON.stringify({
-phone,
-amount:prize
-})
-});
-
-const data = await res.json();
-
-alert("✅ Thank you! Your reward has been recorded successfully. Please wait while your subscription is reviewed.");
-
-localStorage.removeItem("lastPrize");
-
-window.location.href="spin.html";
-
-}
-
-</script>
 
 </body>
 </html>
