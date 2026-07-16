@@ -40,11 +40,18 @@ color:#00ff66;
 <div class="card">
 <h1>Your Balance</h1>
 
-<div class="balance">
+<div class="balance" id="balance">
 KES 0
 </div>
 
 </div>
+<script>
+const prize = localStorage.getItem("lastPrize");
+
+if (prize) {
+    document.getElementById("balance").innerHTML = "KES " + prize;
+}
+</script>
 
 </body>
 </html>
