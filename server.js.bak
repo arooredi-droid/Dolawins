@@ -122,10 +122,13 @@ app.post("/api/user/:username",(req,res)=>{
 
 });
 
-app.get("/api/users", (req, res) => {
-    const db = loadDB();
-    res.json(db.users);
+app.listen(PORT,()=>{
+    console.log("Dolawins server running on port 3000");
 });
+
+// Admin login
+const ADMIN_USERNAME = "admin";
+const ADMIN_PASSWORD = "admin123";
 
 app.post("/admin/login", (req, res) => {
     const { username, password } = req.body;
@@ -146,81 +149,5 @@ app.post("/admin/login", (req, res) => {
 });
 
 app.get("/admin/dashboard", (req, res) => {
-    res.sendFile(path.join(__dirname, "public", "admin_dashboard.html"));
-});
-app.post("/admin/approve/:username", (req, res) => {
-    const db = loadDB();
-
-    const username = req.params.username;
-
-    if (!db.users[username]) {
-        return res.json({
-            success: false,
-            message: "User not found"
-        });
-    }
-
-    db.users[username].subscription = true;
-
-    saveDB(db);
-
-    res.json({
-        success: true,
-        message: "Subscription approved"
-    });
-});
-app.post("/api/subscribe", (req, res) => {
-    const db = loadDB();
-
-    if (!db.subscriptions) {
-        db.subscriptions = [];
-    }
-
-    const {
-        phone,
-        transactionCode,
-        amount
-    } = req.body;
-
-    db.subscriptions.push({
-        phone,
-        transactionCode,
-        amount,
-        status: "pending",
-        date: new Date().toLocaleString()
-    });
-
-    saveDB(db);
-
-    res.json({
-        success: true,
-        message: "Subscription request submitted."
-    });
-});
-app.post("/api/subscribe", (req, res) => {
-    const db = loadDB();
-
-    if (!db.subscriptions) {
-        db.subscriptions = [];
-    }
-
-    const { phone, transactionCode, amount } = req.body;
-
-    db.subscriptions.push({
-        phone,
-        transactionCode,
-        amount,
-        status: "pending",
-        date: new Date().toLocaleString()
-    });
-
-    saveDB(db);
-
-    res.json({
-        success: true,
-        message: "Subscription request received."
-    });
-});
-app.listen(PORT, () => {
-    console.log("Dolawins server running on port 3000");
+    res.send("<h1>Admin Dashboard</h1><p>Login successful.</p>");
 });

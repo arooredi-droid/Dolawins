@@ -92,29 +92,31 @@ const prize = Number(localStorage.getItem("lastPrize")) || 0;
 
 document.getElementById("reward").innerHTML = "KES " + prize;
 
-function claimReward(){
+async function claimReward(){
 
-let money = Number(localStorage.getItem("money")) || 0;
+const phone = prompt("Enter your phone number:");
+if(!phone) return;
 
-money += prize;
+const prize = Number(localStorage.getItem("lastPrize")) || 0;
 
-localStorage.setItem("money", money);
-
-let history = JSON.parse(localStorage.getItem("rewardHistory")) || [];
-
-history.unshift({
-date: new Date().toLocaleString(),
-amount: prize,
-status: "Claimed"
+const res = await fetch("/api/subscribe",{
+method:"POST",
+headers:{
+"Content-Type":"application/json"
+},
+body:JSON.stringify({
+phone,
+amount:prize
+})
 });
 
-localStorage.setItem("rewardHistory", JSON.stringify(history));
+const data = await res.json();
+
+alert("✅ Thank you! Your reward has been recorded successfully. Please wait while your subscription is reviewed.");
 
 localStorage.removeItem("lastPrize");
 
-alert("Reward added successfully!");
-
-window.location.href="dashboard.html";
+window.location.href="spin.html";
 
 }
 

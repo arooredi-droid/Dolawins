@@ -55,38 +55,5 @@
       "subscription": false,
       "history": []
     }
-  },
-  "subscriptions": [
-    {
-      "phone": "0759655901",
-      "amount": 20,
-      "status": "pending",
-      "date": "7/16/2026, 3:12:53 AM"
-    },
-    {
-      "phone": "0759655901",
-      "amount": 0,
-      "status": "pending",
-      "date": "7/16/2026, 3:18:15 AM"
-    },
-    {
-      "phone": "0759655901",
-      "amount": 100,
-      "status": "pending",
-      "date": "7/16/2026, 3:19:58 AM"
-    },
-    {
-      "phone": "0723424702",
-      "amount": 0,
-      "status": "pending",
-      "date": "7/16/2026, 3:31:39 AM"
-    },
-    {
-      "phone": "0723424702",
-      "amount": 0,
-      "status": "pending",
-      "date": "7/16/2026, 3:31:39 AM"
-    }
-  ],
-  "withdrawals": []
+  }
 }

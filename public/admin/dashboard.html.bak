@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Dolawins Admin Dashboard</title>
+<style>
+body{
+    font-family:Arial,sans-serif;
+    background:#f4f4f4;
+    margin:20px;
+}
+h1{
+    color:#2196F3;
+}
+table{
+    width:100%;
+    border-collapse:collapse;
+    background:#fff;
+}
+th,td{
+    border:1px solid #ddd;
+    padding:10px;
+    text-align:center;
+}
+th{
+    background:#2196F3;
+    color:white;
+}
+tr:nth-child(even){
+    background:#f9f9f9;
+}
+button{
+    padding:6px 12px;
+    margin:2px;
+    cursor:pointer;
+}
+.approve{
+    background:green;
+    color:white;
+    border:none;
+}
+.reject{
+    background:red;
+    color:white;
+    border:none;
+}
+</style>
+</head>
+<body>
+
+<h1>Dolawins Admin Dashboard</h1>
+
+<table>
+<tr>
+<th>Username</th>
+<th>Password</th>
+<th>Points</th>
+<th>Pending Rewards</th>
+<th>Subscription</th>
+<th>Actions</th>
+
+<tr>
+<td>Demo User</td>
+<td>1234</td>
+<td>0</td>
+<td>0</td>
+<td>Inactive</td>
+<td>
+<button class="approve">Approve</button>
+<button class="reject">Reject</button>
+</td>
+</tr>
+
+</table>
+
+</body>
+</html>
