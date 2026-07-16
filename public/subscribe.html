@@ -45,11 +45,19 @@ cursor:pointer;
 
 <div class="code">*811*265#</div>
 
-<button onclick="window.location.href='balance.html'">
+<button onclick="confirmSubscription()">
 Check Balance
 </button>
 
 </div>
-
+<script>
+function confirmSubscription() {
+    if (confirm("Have you subscribed using *811*265#?")) {
+        window.location.href = "balance.html";
+    } else {
+        alert("Please subscribe first using *811*265#.");
+    }
+}
+</script>
 </body>
 </html>
