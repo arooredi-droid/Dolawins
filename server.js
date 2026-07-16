@@ -123,47 +123,8 @@ app.get("/api/users", (req, res) => {
     res.json(db.users);
 });
 
-app.post("/admin/login", (req, res) => {
-    const { username, password } = req.body;
-
-    if (
-        username === ADMIN_USERNAME &&
-        password === ADMIN_PASSWORD
-    ) {
-        return res.json({
-            success: true
-        });
-    }
-
-    res.json({
-        success: false,
-        message: "Invalid username or password"
-    });
-});
-
 app.get("/", (req, res) => {
     res.sendFile(path.join(__dirname, "public", "spin.html"));
-});
-app.post("/admin/approve/:username", (req, res) => {
-    const db = loadDB();
-
-    const username = req.params.username;
-
-    if (!db.users[username]) {
-        return res.json({
-            success: false,
-            message: "User not found"
-        });
-    }
-
-    db.users[username].subscription = true;
-
-    saveDB(db);
-
-    res.json({
-        success: true,
-        message: "Subscription approved"
-    });
 });
 app.post("/api/subscribe", (req, res) => {
     const db = loadDB();
